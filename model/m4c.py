@@ -353,7 +353,7 @@ class MultiHeadAttention(nn.Module):
         if self.causal:
             causal_mask = torch.tril(torch.ones(dec_size, dec_size))
             extend_causal_mask = torch.ones((T, T))
-    #       extend_causal_mask[:, -dec_size:] = torch.cat([torch.zeros((T - dec_size, dec_size)), causal_mask])
+            extend_causal_mask[:, -dec_size:] = torch.cat([torch.zeros((T - dec_size, dec_size)), causal_mask])
             extend_causal_mask[-dec_size:, -dec_size:] = causal_mask
             extend_causal_mask = extend_causal_mask.to(attn_scores.device)
 
